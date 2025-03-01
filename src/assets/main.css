@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+
+#app {
+	@apply max-w-dvw max-h-dvh px-10 py-8 flex flex-col justify-center;
+}
+
+@layer base {
+	.sub-module {
+		@apply p-4 my-0;
+	}
+}
+
+@layer base {
+	.tabs__box {
+		@apply text-sm font-medium text-left text-gray-500 border-b border-gray-200;
+	}
+}
+
+@layer base {
+	.tab__item {
+		@apply inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-purple-400 hover:border-purple-400 cursor-pointer;
+	}
+}
+
+details summary {
+	@apply p-2 my-2 hover:bg-purple-200 cursor-pointer shadow-2xl;
+}
+
+details summary {
+	@apply flex items-center justify-between;
+}
+
+details > .sub-module {
+	@apply flex border-b-2 my-0 border-purple-200 items-center justify-start last:border-none;
+}
+
+details:not([open]) > summary {
+	@apply bg-white;
+}
+
+details[open] > summary {
+	@apply bg-purple-300;
+	&.sub-module {
+		@apply border-0;
+	}
+}
+
+details:not([open]) > .sub-module::after {
+	@apply mr-4 mt-[-9px] -order-1 font-bold text-2xl;
+	content: '+';
+}
+
+details[open] > .sub-module::after {
+	@apply mr-4 mt-[-9px] -order-1 font-bold text-2xl;
+	content: '-';
+}
+
+details summary::after {
+	content: url('../assets/icons/chevron_right.svg');
+	transition: transform 0.2s;
+}
+
+details[open] summary::after {
+	content: url('../assets/icons/chevron_up.svg');
+}
