@@ -22,8 +22,8 @@ const fomattedDetails = computed(() => {
 </script>
 
 <template>
-	<small class="flex">
-		<span class="mr-2"> {{ label }} </span>
+	<small class="flex justify-between md:justify-start first:ml-0 md:mx-2">
+		<span class="md:mr-2"> {{ label }} </span>
 		<section class="font-bold">
 			{{ details?.quantity }} | {{ fomattedDetails }}
 		</section>

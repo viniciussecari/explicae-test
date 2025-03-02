@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import LessonContent from './LessonContent.vue'
 import AccordeonDetails from './AccordeonDetails.vue'
+import SelectMenu from './SelectMenu.vue'
 
 const props = defineProps({
 	tabs: {
@@ -22,18 +23,30 @@ setModelValue({ ...props.tabs[0] })
 
 <template>
 	<div class="tabs__box">
-		<div
-			v-for="(tab, index) in tabs"
-			:key="index"
-			:class="`tab__item ${selected?.id === tab.id ? 'text-purple-500' : 'text-gray-500'}`"
-			@click="setModelValue(tab)"
-		>
-			<section class="flex items-center">
-				{{ tab.title }}
+		<section class="hidden sm:block">
+			<div
+				v-for="(tab, index) in tabs"
+				:key="index"
+				:class="`
+					tab__item 
+					${selected?.id === tab.id ? 'text-purple-500' : 'text-gray-500'}
+				`"
+				@click="setModelValue(tab)"
+			>
+				<section class="flex items-center">
+					{{ tab.title }}
 
-				<AccordeonDetails :details="tab" />
-			</section>
-		</div>
+					<AccordeonDetails :details="tab" />
+				</section>
+			</div>
+		</section>
+
+		<SelectMenu
+			class="visible sm:hidden"
+			:options="tabs"
+			:value="selected"
+			@input="($event) => setModelValue($event)"
+		/>
 
 		<section class="p-2">
 			<LessonContent :informations="selected" />

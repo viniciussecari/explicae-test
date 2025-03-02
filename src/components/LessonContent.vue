@@ -12,7 +12,7 @@ const props = defineProps({
 <template>
 	<div class="flex flex-col">
 		<section class="mb-4 flex items-center justify-between">
-			<h1 class="text-3xl">{{ informations?.content?.title }}</h1>
+			<h1 class="md:text-3xl">{{ informations?.content?.title }}</h1>
 
 			<small>{{ informations?.content?.duration }}</small>
 		</section>

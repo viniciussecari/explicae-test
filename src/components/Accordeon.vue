@@ -45,12 +45,12 @@ const styleHierarchy = computed(() => {
 <template>
 	<details class="w-f bg-white">
 		<summary :class="`${styleHierarchy}`">
-			<section class="flex flex-col">
+			<section class="sm:flex md:flex md:flex-col">
 				{{ title }}
 
 				<div
 					v-if="showDetails"
-					class="flex"
+					class="sm:block sm:w-full md:flex md:flex-row"
 				>
 					<AccordeonDetails
 						label="Aulas"
@@ -58,13 +58,11 @@ const styleHierarchy = computed(() => {
 					/>
 
 					<AccordeonDetails
-						class="ml-2"
 						label="Exercícios"
 						:details="exercises"
 					/>
 
 					<AccordeonDetails
-						class="ml-2"
 						label="Matérias"
 						:details="subjects"
 					/>
