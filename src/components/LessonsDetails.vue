@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-	<div class="w-full flex items-center justify-between">
+	<div class="w-full flex sm:items-start md:items-center justify-between">
 		<div class="flex items-center mb-4">
 			<input
 				id="default-checkbox"
@@ -16,6 +16,7 @@ const props = defineProps({
 				:value="lesson.id"
 				class="checkbox"
 			/>
+
 			<label
 				for="default-checkbox"
 				class="ms-2 text-sm font-medium text-gray-900"
@@ -24,6 +25,6 @@ const props = defineProps({
 			</label>
 		</div>
 
-		<small> {{ lesson.duration }} </small>
+		<small class="sm:mtb-auto md:mt-0"> {{ lesson.duration }} </small>
 	</div>
 </template>

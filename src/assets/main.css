@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 #app {
-	@apply max-w-dvw max-h-dvh px-10 py-8 flex flex-col justify-center;
+	@apply max-w-full max-h-full px-10 py-8 flex flex-col justify-center overflow-auto;
 }
 
 @layer base {
@@ -31,7 +31,11 @@ details summary {
 }
 
 details > .sub-module {
-	@apply flex border-b-2 my-0 border-purple-200 items-center justify-start last:border-none;
+	@apply flex border-b-2 my-0 border-purple-200 items-center sm:justify-between md:justify-start last:border-none;
+}
+
+details > .sub-module > section {
+	@apply w-full;
 }
 
 details:not([open]) > summary {
