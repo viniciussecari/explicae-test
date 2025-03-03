@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import EmptyAccordion from './EmptyAccordion.vue'
 import AccordeonDetails from './AccordeonDetails.vue'
+import Loader from './Loader.vue'
 
 const props = defineProps({
 	title: {
@@ -27,7 +28,7 @@ const props = defineProps({
 		default: () => {},
 	},
 
-	isLoading: {
+	loading: {
 		type: Boolean,
 		default: false,
 	},
@@ -85,21 +86,21 @@ const styleHierarchy = computed(() => {
 		</summary>
 
 		<section
-			v-if="hasContent || !isLoading"
+			v-if="hasContent && !loading"
 			class="p-4"
 		>
 			<slot name="content" />
 		</section>
 
+		<span v-if="!hasContent && !loading">
+			<EmptyAccordion />
+		</span>
+
 		<div
-			v-if="isLoading"
-			class="flex justify-center items-center w-full"
+			v-if="loading"
+			class="flex justify-center items-center w-full p-9"
 		>
 			<Loader />
 		</div>
-
-		<span v-if="!hasContent">
-			<EmptyAccordion />
-		</span>
 	</details>
 </template>
