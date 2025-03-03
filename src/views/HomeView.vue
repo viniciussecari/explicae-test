@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import Tabs from '@/components/Tabs.vue'
 import Loader from '@/components/Loader.vue'
@@ -8,16 +8,35 @@ import Accordeon from '@/components/Accordeon.vue'
 import BreadCrumb from '@/components/BreadCrumb.vue'
 
 const store = useLessonsStore()
-const { lessons, isLoading } = storeToRefs(store)
+const { lessons, isLoading, itemSelected } = storeToRefs(store)
 
 onMounted(() => {
 	store.fetchLessons()
 })
 
-const navigation = [
+const navigation = ref([
 	{ name: '', label: 'Cadernos' },
 	{ name: '', label: 'Lingua Portuguesa' },
-]
+])
+
+const setSelectedItem = (id) => {
+	store.selectItem(id)
+}
+
+watch(
+	() => lessons.value,
+	(newVal) => {
+		const item = newVal.find((el) => el.id === itemSelected.value.id)
+
+		if (item) {
+			setTimeout(() => {
+				item.status = false
+				itemSelected.value.id = null
+			}, 2000)
+		}
+	},
+	{ deep: true },
+)
 </script>
 
 <template>
@@ -39,10 +58,12 @@ const navigation = [
 				v-for="(lesson, i) in lessons"
 				:key="lesson.id"
 				:title="`${i + 1}. ${lesson.title}`"
+				:idItem="lesson.id"
 				:subjects="lesson.subjects"
 				:classes="lesson.classes"
 				:exercises="lesson.exercises"
 				:has-content="lesson.subModules.length > 0"
+				@has-item-clicked="setSelectedItem($event)"
 			>
 				<template
 					v-if="lesson.subModules.length > 0"
@@ -52,6 +73,7 @@ const navigation = [
 						v-for="(subLesson, j) in lesson.subModules"
 						:key="subLesson.id"
 						:title="subLesson.title"
+						:isLoading="!lesson.status"
 						:subjects="subLesson.subjects"
 						:classes="subLesson.classes"
 						:exercises="subLesson.exercises"

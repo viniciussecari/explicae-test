@@ -1,19 +1,35 @@
 import { defineStore } from 'pinia'
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import lesson from '@/services/lesson'
 
-export const useLessonsStore = defineStore('lesssons', () => {
-  const lessons = reactive([])
+export const useLessonsStore = defineStore('lessons', () => {
+  const lessons = ref([])
   const isLoading = ref(false)
+  const itemSelected = ref({ id: null })
 
   function fetchLessons() {
     isLoading.value = true
 
     setTimeout(() => {
-      lessons.splice(0, lessons.length, ...lesson)
+      lessons.value = [...lesson]
       isLoading.value = false
     }, 3000)
   }
 
-  return { lessons, isLoading, fetchLessons }
+  function selectItem(id) {
+    const item = lessons.value.find((el) => el.id === id)
+
+    if (item) {
+      itemSelected.value.id = item.id
+      item.status = true
+    }
+  }
+
+  return {
+    lessons,
+    isLoading,
+    fetchLessons,
+    selectItem,
+    itemSelected,
+  }
 })
