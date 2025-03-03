@@ -62,6 +62,7 @@ watch(
 				:subjects="lesson.subjects"
 				:classes="lesson.classes"
 				:exercises="lesson.exercises"
+				:loading="lesson.status"
 				:has-content="lesson.subModules.length > 0"
 				@has-item-clicked="setSelectedItem($event)"
 			>
@@ -73,7 +74,7 @@ watch(
 						v-for="(subLesson, j) in lesson.subModules"
 						:key="subLesson.id"
 						:title="subLesson.title"
-						:isLoading="!lesson.status"
+						:idItem="lesson.id"
 						:subjects="subLesson.subjects"
 						:classes="subLesson.classes"
 						:exercises="subLesson.exercises"
@@ -88,6 +89,7 @@ watch(
 								v-for="(module, k) in subLesson.modules"
 								:key="module.id"
 								:title="`${i + 1}.${k + 1}. ${module.title}`"
+								:idItem="lesson.id"
 								:is-sub-module="true"
 								:show-details="false"
 							>
