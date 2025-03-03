@@ -8,6 +8,10 @@ const props = defineProps({
 		type: String,
 		required: true,
 	},
+	idItem: {
+		type: Number,
+		required: true,
+	},
 
 	classes: {
 		type: Object,
@@ -36,6 +40,8 @@ const props = defineProps({
 	},
 })
 
+const emits = defineEmits(['hasItemClicked'])
+
 const styleHierarchy = computed(() => {
 	const subModule = 'sub-module'
 	return props.isSubModule ? subModule : ''
@@ -44,7 +50,10 @@ const styleHierarchy = computed(() => {
 
 <template>
 	<details class="w-f bg-white">
-		<summary :class="`${styleHierarchy}`">
+		<summary
+			:class="`${styleHierarchy}`"
+			@click="emits('hasItemClicked', idItem)"
+		>
 			<section class="sm:flex md:flex md:flex-col">
 				{{ title }}
 

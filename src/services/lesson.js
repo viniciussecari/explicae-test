@@ -2,6 +2,7 @@ export default [
   {
     title: 'Intepretação de Textos',
     id: 1,
+    status: false,
     classes: {
       quantity: 1193,
       hours: '100:22',
@@ -151,6 +152,7 @@ export default [
   {
     title: 'Outra Coisa',
     id: 2,
+    status: false,
     classes: {
       quantity: 1193,
       hours: '100:22',
