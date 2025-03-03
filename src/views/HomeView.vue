@@ -70,10 +70,10 @@ watch(
 					#content
 				>
 					<Accordeon
-						v-if="!lesson.status"
 						v-for="(subLesson, j) in lesson.subModules"
 						:key="subLesson.id"
 						:title="subLesson.title"
+						:isLoading="!lesson.status"
 						:subjects="subLesson.subjects"
 						:classes="subLesson.classes"
 						:exercises="subLesson.exercises"
@@ -97,13 +97,6 @@ watch(
 							</Accordeon>
 						</template>
 					</Accordeon>
-
-					<div
-						v-else
-						class="flex justify-center items-center w-full"
-					>
-						<Loader />
-					</div>
 				</template>
 			</Accordeon>
 		</section>

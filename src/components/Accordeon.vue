@@ -8,6 +8,7 @@ const props = defineProps({
 		type: String,
 		required: true,
 	},
+
 	idItem: {
 		type: Number,
 		required: true,
@@ -26,6 +27,10 @@ const props = defineProps({
 		default: () => {},
 	},
 
+	isLoading: {
+		type: Boolean,
+		default: false,
+	},
 	isSubModule: {
 		type: Boolean,
 		default: false,
@@ -80,11 +85,18 @@ const styleHierarchy = computed(() => {
 		</summary>
 
 		<section
-			v-if="hasContent"
+			v-if="hasContent || !isLoading"
 			class="p-4"
 		>
 			<slot name="content" />
 		</section>
+
+		<div
+			v-if="isLoading"
+			class="flex justify-center items-center w-full"
+		>
+			<Loader />
+		</div>
 
 		<span v-if="!hasContent">
 			<EmptyAccordion />
